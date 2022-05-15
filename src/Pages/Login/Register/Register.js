@@ -5,6 +5,7 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-fireb
 import auth from '../../../firebase.init';
 import SocialLogIn from '../SocialLogIn/SocialLogIn';
 import Loading from '../../Shared/Loading/Loading';
+import useToken from '../../../hooks/useToken';
 
 const Register = () => {
     const navigate = useNavigate(false);
@@ -18,6 +19,8 @@ const Register = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    // using custom hook for token
+    const [token] = useToken(user);
 
 
     const navigateLogin = () => {
@@ -27,8 +30,9 @@ const Register = () => {
     if (loading || updating) {
         return <Loading></Loading>
     }
-    if (user) {
-        console.log(user);
+    if (token) {
+        // console.log(user);
+        navigate('/home');
     }
 
     const handleRegister = async (event) => {
@@ -44,7 +48,7 @@ const Register = () => {
 
         await createUserWithEmailAndPassword(email, password)
         await updateProfile({ displayName: name });
-        navigate('/home');
+        // navigate('/home');
 
 
     }
