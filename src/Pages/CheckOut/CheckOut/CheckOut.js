@@ -42,7 +42,7 @@ const CheckOut = () => {
             phone: event.target.phone.value
         }
         // using axios
-        axios.post('http://localhost:5000/order', order)
+        axios.post('https://ancient-bastion-68064.herokuapp.com/order', order)
             .then(response => {
                 const { data } = response;
                 console.log(response);
