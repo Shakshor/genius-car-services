@@ -10,7 +10,7 @@ const useToken = user => {
             console.log(user);
             const email = user?.user?.email;
             if (email) {
-                const { data } = await axios.post('https://ancient-bastion-68064.herokuapp.com/login', { email });
+                const { data } = await axios.post('https://genius-car-services-server.onrender.com/login', { email });
                 setToken(data.accessToken);
                 localStorage.setItem('accessToken', data.accessToken);
             }
